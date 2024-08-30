@@ -1,7 +1,7 @@
-# aplikasi-bansos
+# Aplikasi Bansos
 
-url test app https://bansos-test-case.netlify.app/
+URL Test App: [https://bansos-test-case.netlify.app/](https://bansos-test-case.netlify.app/)
 
-# diagram sistem
+## Diagram Sistem
 
-`!diagram sistem (sistem.jpg)`
+![Diagram Sistem](sistem.jpg)
