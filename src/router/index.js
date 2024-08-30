@@ -1,4 +1,3 @@
-// index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import FormDataBansos from '../components/FormDataBansos.vue';
 import PreviewDataBansos from '../components/PreviewDataBansos.vue';

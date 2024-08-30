@@ -150,15 +150,37 @@ export default {
     }
   },
   methods: {
-  async submitForm() {
+    async submitForm() {
     if (this.confirm) {
-      const existingData = JSON.parse(localStorage.getItem('dataList')) || [];
-      existingData.push(this.formData);
-      localStorage.setItem('dataList', JSON.stringify(existingData));
-      this.$router.push('/list'); // Redirect ke halaman daftar
+      try {
+        const { isSuccess, responseTime } = await this.simulateBackendService();
+        if (isSuccess) {
+          const existingData = JSON.parse(localStorage.getItem('dataList')) || [];
+          existingData.push(this.formData);
+          localStorage.setItem('dataList', JSON.stringify(existingData));
+          alert(`Data berhasil disimpan dalam waktu ${responseTime / 1000} detik!`);
+          this.$router.push('/list'); 
+        } else {
+          alert(`Gagal menyimpan data setelah ${responseTime / 1000} detik, silakan coba lagi.`);
+        }
+      } catch (error) {
+        alert('Terjadi kesalahan saat menyimpan data.');
+      }
     } else {
       alert('Harap centang pernyataan kebenaran data.');
     }
+  },
+  simulateBackendService() {
+    return new Promise((resolve) => {
+      const responseTime = Math.floor(Math.random() * 1000) + 1000;
+
+      setTimeout(() => {        if (responseTime < 1500) {
+          resolve({ isSuccess: true, responseTime }); 
+        } else {
+          resolve({ isSuccess: false, responseTime });
+        }
+      }, responseTime);
+    });
   },
   goToPreview() {
     localStorage.setItem('formData', JSON.stringify(this.formData));
@@ -201,10 +223,10 @@ export default {
     if (file && file.size <= 2 * 1024 * 1024) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        this.formData[field] = reader.result; // Menyimpan data base64
-        this.$emit('form-updated', this.formData); // Emit event untuk memperbarui data di parent
+        this.formData[field] = reader.result; 
+        this.$emit('form-updated', this.formData);
       };
-      reader.readAsDataURL(file); // Mengonversi file ke base64
+      reader.readAsDataURL(file); 
     } else {
       alert('File terlalu besar atau tidak valid!');
     }
@@ -231,44 +253,4 @@ export default {
 
 <style scoped>
 @import '../assets/styles.css';
-
-.form-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-form div {
-  margin-bottom: 1rem;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-input, select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-
-button[type="button"] {
-  background-color: #6c757d;
-}
 </style>

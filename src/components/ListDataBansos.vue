@@ -23,6 +23,7 @@
   
   <script>
   export default {
+
     data() {
       return {
         dataList: JSON.parse(localStorage.getItem('dataList')) || []
@@ -38,65 +39,7 @@
     }
   };
   </script>
-  
-  <style scoped>
-  .list-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-  }
-  
-  thead {
-    background-color: #f4f4f4;
-  }
-  
-  th, td {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  button {
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 1rem;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button.back-button {
-    background-color: #6c757d;
-  }
-  
-  button.back-button:hover {
-    background-color: #5a6268;
-  }
-  </style>
-  
+
+<style scoped>
+@import '../assets/styles.css';
+</style>
